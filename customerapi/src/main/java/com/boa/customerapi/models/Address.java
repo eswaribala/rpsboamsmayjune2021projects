@@ -13,6 +13,7 @@ import javax.persistence.ForeignKey;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ import lombok.NoArgsConstructor;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(position = 1, required = true, hidden=true, notes = "Auto generated column")
     @Column(name="Address_Id")
 	private long addressId;
     @Column(name="Door_No")
