@@ -56,7 +56,7 @@ public class SwaggerConfiguration {
         		.groupName("customer-api-1.1")
                 .select()
                 .apis(RequestHandlerSelectors
-                        .basePackage("com.boa.upload"))
+                        .basePackage("com.boa.customerapi"))
                 .paths(PathSelectors.regex("/customers/v1.1.*"))
                 .build()
                 .apiInfo(getApiInfo())
