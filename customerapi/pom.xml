@@ -109,21 +109,33 @@
     	</exclusion>
     </exclusions> -->
 </dependency>
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-<dependency>
-    <groupId>com.fasterxml.jackson.datatype</groupId>
-    <artifactId>jackson-datatype-jdk8</artifactId>
+		
+<!-- graphql -->
 
-</dependency>
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->
-<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->
-<dependency>
-    <groupId>com.fasterxml.jackson.datatype</groupId>
-    <artifactId>jackson-datatype-jsr310</artifactId>
-   
-</dependency>
+          <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphql-spring-boot-starter</artifactId>
+            <version>5.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphql-java-tools</artifactId>
+            <version>5.2.4</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.graphql-java-kickstart/playground-spring-boot-starter -->
+<!-- <dependency>
+    <groupId>com.graphql-java-kickstart</groupId>
+    <artifactId>playground-spring-boot-starter</artifactId>
+    <version>5.10.0</version>
+</dependency> -->
+        
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphiql-spring-boot-starter</artifactId>
+            <version>5.0.2</version>
+        </dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jdk8 -->
+		
 
 		
 	</dependencies>
