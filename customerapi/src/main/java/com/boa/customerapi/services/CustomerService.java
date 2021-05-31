@@ -10,7 +10,7 @@ import com.boa.customerapi.models.Customer;
 import com.boa.customerapi.repositories.CustomerRepostiory;
 
 @Service
-class CustomerService {
+public class CustomerService {
     @Autowired
 	private CustomerRepostiory customerRepository;
 	
