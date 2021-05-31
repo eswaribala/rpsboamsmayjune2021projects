@@ -41,6 +41,10 @@ public class Customer {
 	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name="DOB")
 	private LocalDate dob;
+	/**
+	 * addresses:[{
+	 * },{}]
+	 */
 	@OneToMany(mappedBy ="customer", cascade=CascadeType.ALL,fetch=FetchType.LAZY,orphanRemoval = true)
 	@JsonProperty("addresses")
 	@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)	
