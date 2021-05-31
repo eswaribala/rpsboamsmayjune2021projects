@@ -51,12 +51,15 @@ public class CustomerService {
     
     //update
     
- public Customer updateCustomer(Customer customer) {
+ public Customer updateCustomer(Customer customer,long customerId) {
     	
+	 //Customer customerObj=this.getCustomerById(customerId);
+	 customer.setCustomerId(customerId);
     	if(customer.getAddress().size()>0) {
     		customer.getAddress().stream().forEach( address -> {
                 address.setCustomer(customer);
             } );
+    	
          this.customerRepository.save(customer);
     	}
     	return customer;
