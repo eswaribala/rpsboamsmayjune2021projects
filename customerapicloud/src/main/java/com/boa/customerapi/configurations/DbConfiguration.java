@@ -39,7 +39,7 @@ public class DbConfiguration {
     {
     	//log.info("Entering Production Env.....");
     	log.info("User Name..."+vaultConfiguration.getUsername());
-    	log.info("User Name..."+vaultConfiguration.getPassword());
+    	log.info("Password..."+vaultConfiguration.getPassword());
     	dataSourceBuilder=DataSourceBuilder.create();
     	dataSourceBuilder.url(url);
     	dataSourceBuilder.username(vaultConfiguration.getUsername());
