@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=boajunecustomerdb
+    volumes:
+      - /data/mysql
+  
+  customer-app:
+    image: customerapp-v1
+    build:
+      context: ./
+      dockerfile: dockerfile
+    depends_on:
+      - mysql
+      
+    ports:
+      - 7078:7070
+    volumes:
+      - /data/compose-app
