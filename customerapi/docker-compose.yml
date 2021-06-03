@@ -1,5 +1,5 @@
-version: '3.9'
-
+version : '3'
+ 
 services:
   mysql:
     image: mysql
@@ -10,14 +10,40 @@ services:
       - /data/mysql
   
   customer-app:
-    image: customerapp-v1
+    image: customer-v1
     build:
       context: ./
       dockerfile: dockerfile
     depends_on:
       - mysql
+    container_name: customer-app-c1
       
     ports:
-      - 7078:7070
+      - 7076:7070
     volumes:
       - /data/compose-app
+
+  prometheus:
+    image: prom/prometheus
+    restart: always
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    networks:
+      - boapromgrafana
+
+  grafana: 
+    image: grafana/grafana
+    #command:
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=P@ssw0rd
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - boapromgrafana
+
+### put all the networks here
+networks:
+  boapromgrafana:

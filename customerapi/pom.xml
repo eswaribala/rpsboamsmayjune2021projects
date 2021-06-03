@@ -142,6 +142,15 @@
 		    <scope>compile</scope>
        </dependency>
         
+		<!-- prometheus -->
+		
+         <!-- https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus -->
+		<dependency>
+		    <groupId>io.micrometer</groupId>
+		    <artifactId>micrometer-registry-prometheus</artifactId>
+		    
+		</dependency>
+
 		
 
 		
