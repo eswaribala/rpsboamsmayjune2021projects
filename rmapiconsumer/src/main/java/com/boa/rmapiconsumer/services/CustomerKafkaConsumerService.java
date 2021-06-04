@@ -62,31 +62,7 @@ public class CustomerKafkaConsumerService {
 			logger.info(String.format("Customer Status  -> %s", 
 					e.getMessage()));
 		}
-		/*
 		
-		Gson gson=new Gson();
-		String[] data=message.split(",");
-		CustomerHistory customerHistory=new CustomerHistory();
-		customerHistory= gson.fromJson(message, CustomerHistory.class);
-		if(Integer.parseInt(data[0])>0)
-		{
-		customerHistory.setHistoryId(Integer.parseInt(data[0])+new Random().nextInt(100000));
-		customerHistory.setCustomerId(Integer.parseInt(data[0]));
-		customerHistory.setName(data[1]);
-		customerHistory.setEmail(data[2]);
-		customerHistory.setDob(data[4]);
-		customerRespository.save( customerHistory);
-		logger.info(String.format("Customer Status Stored -> %s,%s", 
-	
-				customerHistory.getHistoryId(),customerHistory.getCustomerId()));
-		
-		}
-		else
-		{
-			logger.info(String.format("Customer Status  -> %s", 
-					data[1]));
-		}
-		*/
 	}
 
 	

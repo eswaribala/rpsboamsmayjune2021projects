@@ -16,7 +16,9 @@ import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import com.boa.rmapiconsumer.models.AppointmentSchedule;
+import com.boa.rmapiconsumer.models.CustomerHistory;
 import com.boa.rmapiconsumer.repositories.AppointmentRepository;
+import com.boa.rmapiconsumer.repositories.CustomerRepository;
 
 
 
@@ -25,7 +27,8 @@ public class KafKaProducerService
 {
 	@Autowired
 	private AppointmentRepository appointmentRepository;
-	
+	@Autowired
+	private CustomerRepository customerRepository;
 	private static final Logger logger = 
 			LoggerFactory.getLogger(KafKaProducerService.class);
 	
@@ -37,24 +40,19 @@ public class KafKaProducerService
 	@Autowired
     private KafkaTemplate<String, AppointmentSchedule> kafkaTemplate;
 	
-	public void sendMessage(long productId) 
+	public void sendMessage() 
 	{
 		AppointmentSchedule appointmentSchedule=new AppointmentSchedule();
-		appointmentSchedule.setCustomerId(new Random().nextInt(10000));
-		appointmentSchedule.setRequestedDate(LocalDate.now());
-		/*
-		List<StockStatusHistory> stockStatusHistoryList=shippingRepository.findAll();
-		StockStatusHistory stockStatusHistory=stockStatusHistoryList.stream()
-		.sorted((s1,s2)->s1.getTimeStamp().compareTo(s2.getTimeStamp()))
-		.filter(stockStatus->stockStatus.getProductId()==productId)
-		.findFirst().orElse(null);
+		long count=this.customerRepository.count();
+			
 		
-		if(stockStatusHistory!=null)
+		if(count>0)
 		{
-		*/
-			//delSchedule.setAvailableQty(stockStatusHistory.getQty());
+		    CustomerHistory customer=this.customerRepository.findAll().get((int)count-1);
+			appointmentSchedule.setCustomerId(customer.getCustomerId());
+			appointmentSchedule.setRequestedDate(LocalDate.now());
 			appointmentSchedule.setPlannedAppointmentDate(LocalDate.now().plusWeeks(2));
-		//}		
+				
 		
 		ListenableFuture<SendResult<String, AppointmentSchedule>> future 
 			= this.kafkaTemplate.send(appointmentTopicName, appointmentSchedule);
@@ -74,6 +72,7 @@ public class KafKaProducerService
             	logger.error("Unable to send appointment Date for Customer : " + appointmentSchedule.getCustomerId(), ex);
             }
        });
+	  }
 	}
 	
 	
