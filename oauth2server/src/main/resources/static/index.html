@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+  <title>Spring Security</title>
+</head>
+<body>
+<h3>
+<a href="/oauth2/authorization/github" th:href="@{/welcome}" th:if="${#httpServletRequest?.remoteUser != undefined }">
+      Go to Dashboard
+</a>
+<a href="/welcome" th:href="@{/oauth2/authorization/github}" th:if="${#httpServletRequest?.remoteUser == undefined }">
+      Login with GitHub
+</a> <br/><br/>
+<a href="/welcome" th:href="@{/oauth2/authorization/facebook}" th:if="${#httpServletRequest?.remoteUser == undefined }">
+      Login with Facebook
+</a> <br/><br/>
+<a href="/welcome" th:href="@{/oauth2/authorization/google}" th:if="${#httpServletRequest?.remoteUser == undefined }">
+      Login with Google
+</a>
+</h3>                
+</body>
+</html> 
