@@ -42,13 +42,25 @@ public class CustomerKafkaConsumerService {
 				System.out.println(entry.getKey()+","+entry.getValue());
 			}
 			customerHistory.setHistoryId(Integer.parseInt(map.get("customerId").toString())+new Random().nextInt(10000));
+			customerHistory.setCustomerId(Integer.parseInt(map.get("customerId").toString()));
+			customerHistory.setEmail(map.get("email").toString());
+			customerHistory.setDob(map.get("dob").toString());
+			customerRespository.save( customerHistory);
+			logger.info(String.format("Customer Status Stored -> %s,%s", 
+		
+					customerHistory.getHistoryId(),customerHistory.getCustomerId()));
+			
+			
 			
 		} catch (JsonMappingException e) {
 			// TODO Auto-generated catch block
+			logger.info(String.format("Customer Status  -> %s", 
+					e.getMessage()));
 			e.printStackTrace();
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.info(String.format("Customer Status  -> %s", 
+					e.getMessage()));
 		}
 		/*
 		
