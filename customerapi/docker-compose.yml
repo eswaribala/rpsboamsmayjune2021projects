@@ -43,7 +43,35 @@ services:
       - 3000:3000
     networks:
       - boapromgrafana
-
+  jaeger:
+    image: jaegertracing/all-in-one:1.17
+    ports:
+      - 8090:16686
+    networks:
+      - boapromgrafana 
+      
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    # Environment settings are defined here https://github.com/openzipkin/zipkin/blob/master/zipkin-server/README.md#environment-variables
+    environment:
+      - STORAGE_TYPE=mem
+      # Point the zipkin at the storage backend
+      #- MYSQL_HOST=mysql
+      # Uncomment to enable scribe
+      # - SCRIBE_ENABLED=true
+      # Uncomment to enable self-tracing
+      # - SELF_TRACING_ENABLED=true
+      # Uncomment to enable debug logging
+      # - JAVA_OPTS=-Dlogging.level.zipkin2=DEBUG
+    ports:
+      # Port used for the Zipkin UI and HTTP Api
+      - 9411:9411
+      # Uncomment if you set SCRIBE_ENABLED=true
+      # - 9410:9410
+    networks:
+      - boapromgrafana
+   
 ### put all the networks here
 networks:
   boapromgrafana:

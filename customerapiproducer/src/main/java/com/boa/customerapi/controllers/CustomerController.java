@@ -16,13 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.boa.customerapi.models.Customer;
+import com.boa.customerapi.services.CustomerDataPublisher;
 import com.boa.customerapi.services.CustomerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bohnman.squiggly.Squiggly;
 import com.github.bohnman.squiggly.util.SquigglyUtils;
 
-import io.jaegertracing.internal.JaegerTracer;
-import io.opentracing.Span;
+//import io.jaegertracing.internal.JaegerTracer;
+//import io.opentracing.Span;
 
 @RestController
 @RequestMapping("/customers")
@@ -31,7 +32,9 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 	@Autowired
-	private JaegerTracer tracer;
+	private CustomerDataPublisher customerDataPubisher;
+	//@Autowired
+	//private JaegerTracer tracer;
 	
 	@PostMapping({"/v1.0", "/v1.1"})
 	public ResponseEntity<?> addCustomer(@RequestBody Customer customer){
@@ -47,9 +50,9 @@ public class CustomerController {
 	@GetMapping({"/v1.0", "/v1.1"})
 	public List<Customer> getAllCustomers(){
 		
-		Span span = tracer.buildSpan("create employee").start();
-		span.setTag("http.status_code", 201);
-		span.finish();
+		//Span span = tracer.buildSpan("create employee").start();
+		//span.setTag("http.status_code", 201);
+		//span.finish();
 		return this.customerService.getAllCustomers();
 	}
 	
@@ -98,5 +101,17 @@ public class CustomerController {
 		
     }
 
+	//publishing
+	@GetMapping({"/v1.0/publish/{customerId}", "/v1.1/publish/{customerId}"})
+	public ResponseEntity<?> publishCustomerById(@PathVariable("customerId") long customerId){
+		
+		if(this.customerDataPubisher.sendCustomerDetails(customerId))
+			return ResponseEntity.ok("Customer Data Published");
+		else
+	    	return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("Customer Not Available");
+
+		
+	
+	}
 	
 }

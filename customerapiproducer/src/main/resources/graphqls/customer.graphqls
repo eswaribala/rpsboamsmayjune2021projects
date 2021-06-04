@@ -1,0 +1,30 @@
+type Customer{
+  customerId: ID!
+  name: FullName
+  address: [Address]
+  contactNo: Long
+  dob: String
+  email: String 
+
+}
+
+type Address{
+addressId: ID!
+city: String
+state: String
+doorNo: String
+streetName: String
+customer: Customer
+}
+
+type FullName{
+firstName: String
+middleName: String
+lastName: String
+
+}
+
+type Query {
+	findAllCustomers:[Customer]
+	findCustomer(customerId: ID):Customer
+}

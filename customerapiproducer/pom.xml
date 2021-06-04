@@ -15,7 +15,7 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
-		<spring-cloud.version>Hoxton.SR11</spring-cloud.version>
+		<spring-cloud.version>Hoxton.SR8</spring-cloud.version>
 		
 	</properties>
 	<dependencies>
@@ -143,23 +143,52 @@
 		    <version>4.7.1</version>
 		    <scope>compile</scope>
        </dependency>
+       <!-- kafka and log -->
+       <!-- https://mvnrepository.com/artifact/com.google.collections/google-collections -->
+	
+		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-bus-kafka</artifactId>
+		</dependency>
+		
+ 	 <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+           
+        </dependency>
+       
+		
+		<!-- pull in logback-core and slf4j-api -->
+         <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            
+        </dependency>
+	 
+	   <!-- Kafka dependency -->
+	   <dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-stream-kafka</artifactId>
+	    </dependency>
+       
+       
         
 		<!-- prometheus -->
 		
          <!-- https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus -->
-		<dependency>
+		<!-- <dependency>
 		    <groupId>io.micrometer</groupId>
 		    <artifactId>micrometer-registry-prometheus</artifactId>
 		    
-		</dependency>
+		</dependency> -->
 
 		<!-- Jaegar -->
 
-		 <dependency>
+		<!--  <dependency>
 		    <groupId>io.opentracing.contrib</groupId>
 		    <artifactId>opentracing-spring-jaeger-web-starter</artifactId>
 		    <version>1.0.3</version>
-		</dependency> 
+		</dependency>  -->
 		<!-- zipkin -->
 		 <!-- <dependency>
 		    <groupId>org.springframework.cloud</groupId>
@@ -182,7 +211,7 @@
 		    <version>2.11.7</version>
 		 </dependency> -->
 	</dependencies>
-<dependencyManagement>
+ <dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
@@ -192,7 +221,7 @@
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
-	</dependencyManagement>
+	</dependencyManagement> 
 
 	<build>
 		<plugins>
